@@ -1,7 +1,7 @@
 import requests
 import re
 
-class WebpageValues:
+class TableExtractor:
 
     teamsMatches = []
     mainValuesMatches = []
