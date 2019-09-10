@@ -12,13 +12,13 @@ class WebpageValues:
             print(team)
 
     def displayMainValues(self):
-        print('\nPlayed Won Drawn Lost')
-        for i in range(4, 81, 4):
+        print('\n P  W  D  L')
+        for i in range(4, len(self.mainTableValueMatches) + 1, 4):
             print(self.mainTableValueMatches[i-4:i])
 
     def displayGoals(self):
-        print('\n GF  GA')
-        for i in range(2, 41, 2):
+        print('\n GF GA')
+        for i in range(2, len(self.goalsTableValueMatches) + 1, 2):
             print(self.goalsTableValueMatches[i-2:i])
 
     def requestWebpage(self):
@@ -43,7 +43,7 @@ class WebpageValues:
 
         # Fill list with unique instances of teams found
         for groups in teamRegex.findall(webpage):
-            team = groups[1] # Extract team name
+            team = groups[1].replace("-", " ") # Extract team name
             if team not in self.teamMatches:
                 self.teamMatches.append(team) # Add new team to list
         self.teamMatches = self.teamMatches[:20]
@@ -58,7 +58,7 @@ class WebpageValues:
         for groups in goalsTableValueRegex.findall(webpage):
             tableValue = groups[1]
             self.goalsTableValueMatches.append(int(tableValue)) # Add to list
-        #self.mainTableValueMatches = self.mainTableValueMatches[:40] # Only first 40 relevant
+        self.goalsTableValueMatches = self.goalsTableValueMatches[:40] # Only first 40 relevant
 
     
     
