@@ -4,10 +4,25 @@ import re
 class WebpageValues:
 
     teamMatches = []
-    tableValueMatches = []
+    mainTableValueMatches = []
+    goalsTableValueMatches = []
+
+    def displayTeams(self):
+        for team in self.teamMatches:
+            print(team)
+
+    def displayMainValues(self):
+        print('\nPlayed Won Drawn Lost')
+        for i in range(4, 81, 4):
+            print(self.mainTableValueMatches[i-4:i])
+
+    def displayGoals(self):
+        print('\n GF  GA')
+        for i in range(2, 41, 2):
+            print(self.goalsTableValueMatches[i-2:i])
 
     def requestWebpage(self):
-        print('Requesting webpage')
+        print('Requesting webpage...')
 
         res = requests.get('https://www.premierleague.com/tables')
         try:
@@ -21,33 +36,29 @@ class WebpageValues:
     def getTable(self):
         webpage = self.requestWebpage() # Get premier league table webpage html
 
-        print(webpage[48000:100000])
-
         teamRegex = re.compile(r'''(/clubs/\d+/([A-Za-z-]+)/overview)''', re.VERBOSE)
 
-        tableValueRegex = re.compile(r'''
-        (<td>([-+]?\d+)</td>)|                # Played,, won, drawn, lost
-        ([ ]*<td class="hideSmall">(\d+)</td>)|   # GF, GA              
-        ([ ]*<td class="points">(\d+)</td>)       # Points
-        ''')
+        mainTableValueRegex = re.compile(r'''(<td>(\d+)</td>)''')                          # Played,, won, drawn, lost
+        goalsTableValueRegex = re.compile(r'''([ ]*<td class="hideSmall">(\d+)</td>)''')    # GF, GA              
 
         # Fill list with unique instances of teams found
         for groups in teamRegex.findall(webpage):
             team = groups[1] # Extract team name
             if team not in self.teamMatches:
-                print(team)
                 self.teamMatches.append(team) # Add new team to list
+        self.teamMatches = self.teamMatches[:20]
 
         # Fill list with each table value found
-        for groups in tableValueRegex.findall(webpage):
+        for groups in mainTableValueRegex.findall(webpage):
             tableValue = groups[1]
-            print(groups[0])
-            print(groups)
-            self.tableValueMatches.append(int(tableValue)) # Add to list
+            self.mainTableValueMatches.append(int(tableValue)) # Add to list
+        self.mainTableValueMatches = self.mainTableValueMatches[:80] # Only first 80 relevant
+        
+        # Fill list with each goal value found
+        for groups in goalsTableValueRegex.findall(webpage):
+            tableValue = groups[1]
+            self.goalsTableValueMatches.append(int(tableValue)) # Add to list
+        #self.mainTableValueMatches = self.mainTableValueMatches[:40] # Only first 40 relevant
 
-        # Print result
-        print(self.teamMatches)
-        #print(self.tableValueMatches[:160])
-
-        for i in range(4, 161, 4):
-            print(self.tableValueMatches[i-4:i])
+    
+    
