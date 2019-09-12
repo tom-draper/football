@@ -3,14 +3,14 @@
 ### Eductional Project  
 I begain this project to find a method to obtain the premier league table data values with real time accuracy. After reading Automate The Boring Stuff With Python by Al Sweigart, I wanted to create a project that used both regular expressions and web scraping. After research, I  then aimed to get a better understanding of web scraping & HTML format, object oriented programming in Python, as well as getting a better grasp at dictionaries. Another main target of this project was to learn about and make use of regular expressions as they would be necessary for how I planned to tackle this project.
 
-Project Aims:
+###### Project Aims:
 - Extract data from the web
 - Research regular expressions.
 - Apply regular expressions with the RegEx module.
 - Better understand object oriented programming in Python.
 - Understand more advanced dictionaries.
 
-What I Learned:
+###### What I Learned:
 - Basics of regular expressions.
 - How to create regular expressions using the re module.
 - How to request a website using the requests module.
