@@ -15,9 +15,11 @@ goalValues = te.goalValuesMatches # List of all GF and GA data values in order
 
 # Build teams with stats data from extracted table
 teams = {}
-for i in range(0, 20): # 20 different teams
-    teams["team{0}".format(i)] = Team(i, te.teamsMatches, te.mainValuesMatches, te.goalValuesMatches)
+for position in range(0, 20): # 20 different teams
+    teams["team{0}".format(position)] = Team(position, te.teamsMatches, te.mainValuesMatches, te.goalValuesMatches)
 
 display = Display()
 # Display premier league table
 display.displayTable(teams)
+
+input("Press enter to exit")

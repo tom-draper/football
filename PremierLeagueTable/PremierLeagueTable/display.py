@@ -1,12 +1,12 @@
 class Display():
 
     def divider(self):
-        print("---------------------------------------------------------------")
+        print("-------------------------------------------------------------------")
 
     def displayTable(self, teams):
         print('Premier League Table\n')
         self.divider()
-        print("|          TEAM            |    P   W   D   L  GF  GA  GD   P |")
+        print("|          TEAM            |   P   W   D   L    GF  GA  GD     P  |")
         self.divider()
         for key in teams.keys():
             self.divider()
@@ -21,13 +21,13 @@ class Display():
                 str(teams[key].stats['drawn']) +
                 ' ' + (3 - len(str(teams[key].stats['lost']))) * ' ' +
                 str(teams[key].stats['lost']) +
-                ' ' + (3 - len(str(teams[key].stats['gf']))) * ' ' +
+                3 * ' ' + (3 - len(str(teams[key].stats['gf']))) * ' ' +
                 str(teams[key].stats['gf']) +
                 ' ' + (3 - len(str(teams[key].stats['ga']))) * ' ' +
                 str(teams[key].stats['ga']) +
                 ' ' + (3 - len(str(teams[key].stats['gd']))) * ' ' +
                 str(teams[key].stats['gd']) +
-                ' ' + (3 - len(str(teams[key].stats['points']))) * ' ' +
+                3 * ' ' + (3 - len(str(teams[key].stats['points']))) * ' ' +
                 str(teams[key].stats['points']) +
                 '  |')
         self.divider()
