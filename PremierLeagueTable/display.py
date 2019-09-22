@@ -7,7 +7,6 @@ class Display():
         print('Premier League Table\n')
         self.divider()
         print("|          TEAM            |   P   W   D   L    GF  GA  GD     P  |")
-        self.divider()
         for key in teams.keys():
             self.divider()
             print('| ' +

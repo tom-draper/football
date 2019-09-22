@@ -36,8 +36,7 @@ class TableExtractor:
     def extractTable(self):
         webpage = self.requestWebpage() # Get premier league table webpage html
 
-        teamRegex = re.compile(r'''(/clubs/\d+/([A-Za-z-]+)/overview)''', re.VERBOSE)
-
+        teamRegex = re.compile(r'''(/clubs/\d+/([A-Za-z-]+)/overview)''')
         mainValuesRegex = re.compile(r'''(<td>(\d+)</td>)''')                          # Played,, won, drawn, lost
         goalValuesRegex = re.compile(r'''([ ]*<td class="hideSmall">(\d+)</td>)''')    # GF, GA              
 
