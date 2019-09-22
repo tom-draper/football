@@ -3,7 +3,8 @@ from team import Team
 from display import Display
 
 te = TableExtractor()
-# Request PL website html and extract teams and table values and store 
+# Request PL website html and extract teams and table values and
+#  store 
 # in lists for teams, main values (played, win, drawn, loss) and goal values
 # (GF and GA)
 te.extractTable() 
