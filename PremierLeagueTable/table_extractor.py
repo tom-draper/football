@@ -1,25 +1,30 @@
 import requests
-import re
+from bs4 import BeautifulSoup
 
 class TableExtractor:
 
-    teamsMatches = []
-    mainValuesMatches = []
-    goalValuesMatches = []
-
-    def displayTeams(self):
-        for team in self.teamsMatches:
-            print(team)
-
-    def displayMainValues(self):
-        print('\n P  W  D  L')
-        for i in range(4, len(self.mainValuesMatches) + 1, 4):
-            print(self.mainValuesMatches[i-4:i])
-
-    def displayGoals(self):
-        print('\n GF GA')
-        for i in range(2, len(self.goalValuesMatches) + 1, 2):
-            print(self.goalValuesMatches[i-2:i])
+    teams = []
+    played = []
+    wins = []
+    draws = []
+    losses = []
+    gf = []
+    ga = []
+    gd = []
+    points = []
+    
+    def sortValues(self, values):
+        # Sort all values list into separate ordered lists
+        for i in range(0, len(values), 8):
+            self.played.append(values[i])
+            self.wins.append(values[i + 1])
+            self.draws.append(values[i + 2])
+            self.losses.append(values[i + 3])
+            self.gd.append(values[i + 4])
+            self.gf.append(values[i + 5])
+            self.ga.append(values[i + 6])
+            self.points.append(values[i + 7])
+            
 
     def requestWebpage(self):
         print('Requesting webpage...')
@@ -35,29 +40,28 @@ class TableExtractor:
 
     def extractTable(self):
         webpage = self.requestWebpage() # Get premier league table webpage html
-
-        teamRegex = re.compile(r'''(/clubs/\d+/([A-Za-z-]+)/overview)''')
-        mainValuesRegex = re.compile(r'''(<td>(\d+)</td>)''')                          # Played,, won, drawn, lost
-        goalValuesRegex = re.compile(r'''([ ]*<td class="hideSmall">(\d+)</td>)''')    # GF, GA              
-
-        # Fill list with unique instances of teams found
-        for groups in teamRegex.findall(webpage):
-            team = groups[1].replace("-", " ") # Extract team name
-            if team not in self.teamsMatches:
-                self.teamsMatches.append(team) # Add new team to list
-        self.teamsMatches = self.teamsMatches[:20]
-
-        # Fill list with each table value found
-        for groups in mainValuesRegex.findall(webpage):
-            tableValue = groups[1]
-            self.mainValuesMatches.append(int(tableValue)) # Add to list
-        self.mainValuesMatches = self.mainValuesMatches[:80] # Only first 80 relevant
+        soup = BeautifulSoup(webpage, 'html.parser')
         
-        # Fill list with each goal value found
-        for groups in goalValuesRegex.findall(webpage):
-            tableValue = groups[1]
-            self.goalValuesMatches.append(int(tableValue)) # Add to list
-        self.goalValuesMatches = self.goalValuesMatches[:40] # Only first 40 relevant
-
-    
-    
+        # Write to html debug file
+        fileObj = open('debug.html', 'w')
+        fileObj.write(str(soup.prettify))
+        
+        # Get html table rows of for each team in premier league table 
+        # Top team tableDark, next 3 tableMid, 5th tableLight, last 3 tableMid, rest blank
+        tableRows = soup.find_all('tr', {'class': ['tableDark', 'tableMid', 'tableLight', '']})
+        
+        values = []
+        for row in tableRows[:20]:
+            # Add team to main teams list
+            self.teams += row.find('td', {'class': 'team'}).find('a').find('span', {'class', 'long'})
+            # Add html table data line for played, wins, draws, losses and goal difference
+            temp = row.find_all('td', {'class': None})
+            # Add html table data line for goals for and goals against
+            temp += row.find_all('td', {'class': 'hideSmall'})
+            # Add html table data line for points
+            temp += row.find_all('td', {'class': 'points'})
+            # Add raw data values to list
+            for line in temp:
+                values.append(line.get_text().strip())
+                
+        self.sortValues(values)
