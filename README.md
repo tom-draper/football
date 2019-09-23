@@ -1,7 +1,7 @@
 # Premier-League-Table
 
 ### Eductional Project  
-I begain this project to find a method to obtain the premier league table data values with real time accuracy. After reading Automate The Boring Stuff With Python by Al Sweigart, I wanted to create a project that used web scraping. After research, I  then aimed to get a better understanding of web scraping and general HTML format, object oriented programming in Python. Initially another main target of this project was to learn about and make use of regular expressions when extracting data from the HTML. However, after more research I found the use of the Beautiful Soup module was more reliable and suitable for this purpose and therefore changed my implemenation.
+I begain this project to find a method to obtain the premier league table data values with real time accuracy. After reading Automate The Boring Stuff With Python by Al Sweigart, I wanted to create a project that used web scraping. Initially another main target of this project was to learn about and make use of regular expressions when extracting data from the HTML. However, after more research I found the use of the Beautiful Soup module was more reliable and suitable for this purpose and therefore changed my implemenation.
 
 #### Project Aims:
 - Extract data from the web
