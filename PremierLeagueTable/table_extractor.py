@@ -69,6 +69,6 @@ class TableExtractor:
             temp += row.find_all('td', {'class': 'points'})
             # Add raw data values to list
             for line in temp:
-                values.append(line.get_text().strip())
+                values.append(int(line.get_text().strip()))
                 
         self.sortValues(values)
