@@ -1,6 +1,7 @@
 # premier_league_table.py - extracts current premier league table values from
 # premier league website and displays to console in a table
 
+import sys
 from table_extractor import TableExtractor
 from team import Team
 from display import Display
@@ -20,8 +21,19 @@ for position in range(len(tableEx.teams)): # 20 different teams
                                           tableEx.gd[position], 
                                           tableEx.points[position])
 
-display = Display()
+# Display large table is default
+displaySmall = False
+# Get arguemnts
+if len(sys.argv) > 1:
+    for i in range(1, len(sys.argv)):
+        if sys.argv[i].lower() == 'small' or sys.argv[i].lower() == 's':
+            displaySmall = True
+
 # Display premier league table
-display.displayTable(teams)
+display = Display()
+if displaySmall:
+    display.displaySmallTable(teams)
+else:
+    display.displayBigTable(teams)
 
 input("Press enter to exit")

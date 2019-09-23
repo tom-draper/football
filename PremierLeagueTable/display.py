@@ -2,16 +2,34 @@
 
 class Display():
 
-    def divider(self):
+    def smallDivider(self):
+        print("-------------------------------------------------")
+        
+    # Display team played, goal difference and points in a table
+    def displaySmallTable(self, teams):
+        print('Premier League Table')
+        self.smallDivider()
+        print("|          TEAM            |   P    GD   |   P  |") 
+        self.smallDivider()
+        for team in teams.keys():
+            print('| ' + team.ljust(25, ' ') + '|  ' +
+                str(teams[team].stats['played']).rjust(2, ' ') +
+                str(teams[team].stats['gd']).rjust(6, ' ') +
+                '|'.rjust(4, ' ') + 
+                str(teams[team].stats['points']).rjust(4, ' ') +
+                '  |')
+        self.smallDivider()
+        
+    def bigDivider(self):
         print("-----------------------------------------------------------------------")
 
-    # Display team data in form of a table
-    def displayTable(self, teams):
-        print('Premier League Table\n')
-        self.divider()
+    # Display full team data in form of a table
+    def displayBigTable(self, teams):
+        print('Premier League Table')
+        self.bigDivider()
         print("|          TEAM            |   P   W   D   L    GF   GA   GD   |   P  |")
         for team in teams.keys():
-            self.divider()
+            self.bigDivider()
             print('| ' + team.ljust(25, ' ') + '|  ' +
                   str(teams[team].stats['played']).rjust(2, ' ') +
                   str(teams[team].stats['won']).rjust(4, ' ') +
@@ -23,4 +41,4 @@ class Display():
                   '|'.rjust(4, ' ') + 
                   str(teams[team].stats['points']).rjust(4, ' ') +
                   '  |')
-        self.divider()
+        self.bigDivider()
