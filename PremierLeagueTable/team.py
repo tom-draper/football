@@ -1,3 +1,5 @@
+# team.py - holds the data structures to represent a premier leagie team results
+
 class Team():
 
     def __init__(self, played, won, drawn, lost, gf, ga, gd, points):

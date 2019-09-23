@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 
 class TableExtractor:
 
-    def __init__():
+    def __init__(self):
         self.teams = []
         self.played = []
         self.wins = []
