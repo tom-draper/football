@@ -52,10 +52,6 @@ class TableExtractor:
         webpage = self.requestPLWebpage() # Get premier league table webpage html
         soup = BeautifulSoup(webpage, 'html.parser')
         
-        # Write to html debug file
-        fileObj = open('debug.html', 'w')
-        fileObj.write(str(soup.prettify))
-        
         # Get html table rows of for each team in premier league table 
         # Top team tableDark, next 3 tableMid, 5th tableLight, last 3 tableMid, rest empty
         tableRows = soup.find_all('tr', {'class': ['tableDark', 'tableMid', 'tableLight', '']})
