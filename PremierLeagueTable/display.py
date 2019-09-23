@@ -1,8 +1,11 @@
+# display.py - display teams values in formatted table
+
 class Display():
 
     def divider(self):
         print("-----------------------------------------------------------------------")
 
+    # Display team data in form of a table
     def displayTable(self, teams):
         print('Premier League Table\n')
         self.divider()

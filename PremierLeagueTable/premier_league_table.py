@@ -1,3 +1,6 @@
+# premier_league_table.py - extracts current premier league table values from
+# premier league website and displays to console in a table
+
 from table_extractor import TableExtractor
 from team import Team
 from display import Display
