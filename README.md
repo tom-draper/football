@@ -24,6 +24,5 @@ In future, I could extend this project to graph the points of each premier leagu
 
 ### Hot to use:
 Running premier_league_table.py will display the current premier league table in the command line. The full table is displayed as default. Entering argument "small" or "s" will display a small version of the table.  
-
-The program requests for the html from the official Premier League tables website (https://www.premierleague.com/tables). Using regular expressions, the first 20 teams mentioned and corresponding table values are searched for and stored in lists which are then used to later instantiate 20 team objects are then built using these values extracted. The Premier League table can then be displayed using the data stored in each team object.
+The program requests for the html from the official Premier League tables website (https://www.premierleague.com/tables).
 
