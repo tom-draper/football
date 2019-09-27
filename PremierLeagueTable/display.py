@@ -28,8 +28,8 @@ class Display():
         print('Premier League Table')
         self.bigDivider()
         print("|          TEAM            |   P   W   D   L    GF   GA   GD   |   P  |")
+        self.bigDivider()
         for team in teams.keys():
-            self.bigDivider()
             print('| ' + team.ljust(25, ' ') + '|  ' +
                   str(teams[team].stats['played']).rjust(2, ' ') +
                   str(teams[team].stats['won']).rjust(4, ' ') +
