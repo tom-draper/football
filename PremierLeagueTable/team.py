@@ -2,12 +2,13 @@
 
 class Team():
 
-    def __init__(self, played, won, drawn, lost, gf, ga, gd, points):
+    def __init__(self, position, played, won, drawn, lost, gf, ga, gd, points):
         self.stats = {}
-        self.buildDict(played, won, drawn, lost, gf, ga, gd, points)
+        self.buildDict(position, played, won, drawn, lost, gf, ga, gd, points)
 
     # Add teams premier league values to its dictionary
-    def buildDict(self, played, won, drawn, lost, gf, ga, gd, points):
+    def buildDict(self, position, played, won, drawn, lost, gf, ga, gd, points):
+        self.stats['position'] = position
         self.stats['played'] = played
         self.stats['won'] = won
         self.stats['lost'] = lost

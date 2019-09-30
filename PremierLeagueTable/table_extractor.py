@@ -13,6 +13,7 @@ class TableExtractor:
 
     def __init__(self):
         self.teams = []
+        self.positions = []
         self.played = []
         self.wins = []
         self.draws = []
@@ -24,15 +25,16 @@ class TableExtractor:
     
     # Sort all values list into separate ordered lists
     def sortValues(self, values):
-        for i in range(0, len(values), 8):
-            self.played.append(values[i])
-            self.wins.append(values[i + 1])
-            self.draws.append(values[i + 2])
-            self.losses.append(values[i + 3])
-            self.gd.append(values[i + 4])
-            self.gf.append(values[i + 5])
-            self.ga.append(values[i + 6])
-            self.points.append(values[i + 7])
+        for i in range(0, len(values), 9):
+            self.positions.append(values[i])
+            self.played.append(values[i + 1])
+            self.wins.append(values[i + 2])
+            self.draws.append(values[i + 3])
+            self.losses.append(values[i + 4])
+            self.gd.append(values[i + 5])
+            self.gf.append(values[i + 6])
+            self.ga.append(values[i + 7])
+            self.points.append(values[i + 8])
 
     # Requests premier 
     def requestPLWebpage(self):
@@ -57,12 +59,16 @@ class TableExtractor:
         tableRows = soup.find_all('tr', {'class': ['tableDark', 'tableMid', 'tableLight', '']})
         
         values = []
-        for row in tableRows[:20]: # Only first twenty
+        for row in tableRows[:20]: # Only first twenty rows
             # Add team name to main teams list
             self.teams += row.find('td', {'class': 'team'}).find('a').find('span', {'class', 'long'})
             
+            
+            temp = []
+            # Record team position
+            temp.append(row.find('td', {'id': 'Tooltip'}).find('span', {'class': 'value'}))
             # Add html table data line for played, wins, draws, losses and goal difference
-            temp = row.find_all('td', {'class': None})
+            temp += row.find_all('td', {'class': None})
             # Add html table data line for goals for and goals against
             temp += row.find_all('td', {'class': 'hideSmall'})
             # Add html table data line for points

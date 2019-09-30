@@ -6,28 +6,31 @@ from table_extractor import TableExtractor
 from team import Team
 from display import Display
 
+# Extract and store premier league table data
 tableEx = TableExtractor()
 tableEx.extractTable() 
 
 # Build teams with stats data from extracted table
 teams = {}
-for position in range(len(tableEx.teams)): # 20 different teams
-    teams[tableEx.teams[position]] = Team(tableEx.played[position], 
-                                          tableEx.wins[position], 
-                                          tableEx.draws[position], 
-                                          tableEx.losses[position], 
-                                          tableEx.gf[position], 
-                                          tableEx.ga[position], 
-                                          tableEx.gd[position], 
-                                          tableEx.points[position])
+for n in range(len(tableEx.teams)): # 20 different teams
+    # Make a new team from tableEx lists
+    teams[tableEx.teams[n]] = Team(tableEx.positions[n],
+                                     tableEx.played[n], 
+                                     tableEx.wins[n], 
+                                     tableEx.draws[n], 
+                                     tableEx.losses[n], 
+                                     tableEx.gf[n], 
+                                     tableEx.ga[n], 
+                                     tableEx.gd[n], 
+                                     tableEx.points[n])
 
 # Display large table is default
 displaySmall = False
-# Get arguemnts
+# Get command line arguemnts
 if len(sys.argv) > 1:
     for i in range(1, len(sys.argv)):
         if sys.argv[i].lower() == 'small' or sys.argv[i].lower() == 's':
-            displaySmall = True
+            displaySmall = True # Display small premier league instead
 
 # Display premier league table
 display = Display()
