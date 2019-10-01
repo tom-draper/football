@@ -24,8 +24,6 @@ for n in range(len(tableEx.teamNames)):
                                           tableEx.ga[n], 
                                           tableEx.gd[n], 
                                           tableEx.points[n])
-    
-print(teams['LIV'].data)
 
 # Display large table is default
 displaySmall = False
