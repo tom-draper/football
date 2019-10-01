@@ -1,4 +1,4 @@
-# table_extractor.py - scraps premier league table website and locates table
+# tableExtractor.py - scraps premier league table website and locates table
 # row values. Values are sorted into speficic list for display.
 #
 # Note: I found both html 'table' and 'tbody' attribute only enclosed the top 

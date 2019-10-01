@@ -1,6 +1,6 @@
-import datetime
-
 # display.py - display teams values in formatted table
+
+import datetime
 
 class Display():
     
