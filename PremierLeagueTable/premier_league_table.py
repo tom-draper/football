@@ -3,7 +3,6 @@
 
 import sys
 from table_extractor import TableExtractor
-from team import Team
 from display import Display
 
 # Extract and store premier league table data
@@ -14,16 +13,16 @@ tableEx.extractTable()
 teams = {}
 for n in range(len(tableEx.teamNames)):
     # Make a new team from tableEx lists with abreviated team name as key
-    teams[tableEx.teamNames[n][1]] = Team(tableEx.teamNames[n][0],
-                                          tableEx.positions[n],
-                                          tableEx.played[n], 
-                                          tableEx.wins[n], 
-                                          tableEx.draws[n], 
-                                          tableEx.losses[n], 
-                                          tableEx.gf[n], 
-                                          tableEx.ga[n], 
-                                          tableEx.gd[n], 
-                                          tableEx.points[n])
+    teams[tableEx.teamNames[n][1]] = {'name': tableEx.teamNames[n][0], 
+                                      'position': tableEx.positions[n], 
+                                      'played': tableEx.played[n], 
+                                      'won': tableEx.wins[n], 
+                                      'lost': tableEx.losses[n], 
+                                      'drawn': tableEx.draws[n], 
+                                      'gf': tableEx.gf[n], 
+                                      'ga': tableEx.ga[n], 
+                                      'gd': tableEx.gd[n], 
+                                      'points': tableEx.points[n]}
 
 # Display large table is default
 displaySmall = False

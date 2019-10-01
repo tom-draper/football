@@ -31,12 +31,12 @@ class Display():
         print('|' + (' ' * 3) + 'TEAM' + (' ' * 3) + '|   P    GD   |   P  |')
         self.smallDivider()
         for team in teams.keys():
-            print('| ' + (str(teams[team].data['position']) + '.').ljust(4, ' ') +
+            print('| ' + (str(teams[team]['position']) + '.').ljust(4, ' ') +
                   team.ljust(5, ' ') + '|  ' +
-                  str(teams[team].data['played']).rjust(2, ' ') +
-                  str(teams[team].data['gd']).rjust(6, ' ') +
+                  str(teams[team]['played']).rjust(2, ' ') +
+                  str(teams[team]['gd']).rjust(6, ' ') +
                   '|'.rjust(4, ' ') + 
-                  str(teams[team].data['points']).rjust(4, ' ') +
+                  str(teams[team]['points']).rjust(4, ' ') +
                   '  |')
         self.smallDivider()
         
@@ -52,17 +52,17 @@ class Display():
         print('|' + (' ' * 13) + 'TEAM' + (' ' * 13) + '|   P   W   D   L  ' + 
               '  GF   GA   GD   |   P  |')
         self.largeDivider()
-        for team in teams.keys():
-            print('| ' + (str(teams[team].data['position']) + '.').ljust(4, ' ') +
-                  teams[team].data['name'].ljust(25, ' ') + '|  ' +
-                  str(teams[team].data['played']).rjust(2, ' ') +
-                  str(teams[team].data['won']).rjust(4, ' ') +
-                  str(teams[team].data['drawn']).rjust(4, ' ') +
-                  str(teams[team].data['lost']).rjust(4, ' ') +
-                  str(teams[team].data['gf']).rjust(6, ' ') +
-                  str(teams[team].data['ga']).rjust(5, ' ') +
-                  str(teams[team].data['gd']).rjust(5, ' ') +
+        for teamData in teams.values():
+            print('| ' + (str(teamData['position']) + '.').ljust(4, ' ') +
+                  teamData['name'].ljust(25, ' ') + '|  ' +
+                  str(teamData['played']).rjust(2, ' ') +
+                  str(teamData['won']).rjust(4, ' ') +
+                  str(teamData['drawn']).rjust(4, ' ') +
+                  str(teamData['lost']).rjust(4, ' ') +
+                  str(teamData['gf']).rjust(6, ' ') +
+                  str(teamData['ga']).rjust(5, ' ') +
+                  str(teamData['gd']).rjust(5, ' ') +
                   '|'.rjust(4, ' ') + 
-                  str(teams[team].data['points']).rjust(4, ' ') +
+                  str(teamData['points']).rjust(4, ' ') +
                   '  |')
         self.largeDivider()
