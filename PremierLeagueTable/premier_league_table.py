@@ -10,19 +10,22 @@ from display import Display
 tableEx = TableExtractor()
 tableEx.extractTable() 
 
-# Build teams with stats data from extracted table
+# Build 20 teams with stats data from extracted table
 teams = {}
-for n in range(len(tableEx.teams)): # 20 different teams
-    # Make a new team from tableEx lists
-    teams[tableEx.teams[n]] = Team(tableEx.positions[n],
-                                     tableEx.played[n], 
-                                     tableEx.wins[n], 
-                                     tableEx.draws[n], 
-                                     tableEx.losses[n], 
-                                     tableEx.gf[n], 
-                                     tableEx.ga[n], 
-                                     tableEx.gd[n], 
-                                     tableEx.points[n])
+for n in range(len(tableEx.teamNames)):
+    # Make a new team from tableEx lists with abreviated team name as key
+    teams[tableEx.teamNames[n][1]] = Team(tableEx.teamNames[n][0],
+                                          tableEx.positions[n],
+                                          tableEx.played[n], 
+                                          tableEx.wins[n], 
+                                          tableEx.draws[n], 
+                                          tableEx.losses[n], 
+                                          tableEx.gf[n], 
+                                          tableEx.ga[n], 
+                                          tableEx.gd[n], 
+                                          tableEx.points[n])
+    
+print(teams['LIV'].data)
 
 # Display large table is default
 displaySmall = False

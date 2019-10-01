@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 class TableExtractor:
 
     def __init__(self):
-        self.teams = []
+        self.teamNames = []
         self.positions = []
         self.played = []
         self.wins = []
@@ -54,6 +54,9 @@ class TableExtractor:
         webpage = self.requestPLWebpage() # Get premier league table webpage html
         soup = BeautifulSoup(webpage, 'html.parser')
         
+        fileObj = open('debug.html', 'w')
+        fileObj.write(str(soup))
+        
         # Get html table rows of for each team in premier league table 
         # Top team tableDark, next 3 tableMid, 5th tableLight, last 3 tableMid, rest empty
         tableRows = soup.find_all('tr', {'class': ['tableDark', 'tableMid', 'tableLight', '']})
@@ -61,7 +64,10 @@ class TableExtractor:
         values = []
         for row in tableRows[:20]: # Only first twenty rows
             # Add team name to main teams list
-            self.teams += row.find('td', {'class': 'team'}).find('a').find('span', {'class', 'long'})
+            teamLong = row.find('td', {'class': 'team'}).find('a').find('span', {'class', 'long'}).get_text()
+            teamShort = row.find('td', {'class': 'team'}).find('span', {'class': 'short'}).get_text()
+            # Save team name with abreviated version to list
+            self.teamNames.append(tuple([teamLong, teamShort]))
             
             # Collect the html lines for the team's table values
             lines = []
