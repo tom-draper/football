@@ -37,6 +37,6 @@ display = Display()
 if displaySmall:
     display.displaySmallTable(teams)
 else:
-    display.displayBigTable(teams)
+    display.displayLargeTable(teams)
 
 input("Press enter to exit")

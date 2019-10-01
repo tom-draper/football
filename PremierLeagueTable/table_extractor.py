@@ -63,18 +63,18 @@ class TableExtractor:
             # Add team name to main teams list
             self.teams += row.find('td', {'class': 'team'}).find('a').find('span', {'class', 'long'})
             
-            
-            temp = []
-            # Record team position
-            temp.append(row.find('td', {'id': 'Tooltip'}).find('span', {'class': 'value'}))
+            # Collect the html lines for the team's table values
+            lines = []
+            # Record the html containing team's position
+            lines.append(row.find('td', {'id': 'Tooltip'}).find('span', {'class': 'value'}))
             # Add html table data line for played, wins, draws, losses and goal difference
-            temp += row.find_all('td', {'class': None})
+            lines += row.find_all('td', {'class': None})
             # Add html table data line for goals for and goals against
-            temp += row.find_all('td', {'class': 'hideSmall'})
+            lines += row.find_all('td', {'class': 'hideSmall'})
             # Add html table data line for points
-            temp += row.find_all('td', {'class': 'points'})
-            # Add raw data values to list
-            for line in temp:
+            lines += row.find_all('td', {'class': 'points'})
+            # Extract raw data values and add to list
+            for line in lines:
                 values.append(int(line.get_text().strip()))
                 
         self.sortValues(values)
