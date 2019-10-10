@@ -2,27 +2,14 @@
 # premier league website and displays to console in a table
 
 import sys
-from table_extractor import TableExtractor
+from extractor import Extractor
 from display import Display
 
 # Extract and store premier league table data
-tableEx = TableExtractor()
+tableEx = Extractor()
 tableEx.extractTable() 
-
-# Build 20 teams with stats data from extracted table
-teams = {}
-for n in range(len(tableEx.teamNames)):
-    # Make a new team from tableEx lists with abreviated team name as key
-    teams[tableEx.teamNames[n][1]] = {'name': tableEx.teamNames[n][0], 
-                                      'position': tableEx.positions[n], 
-                                      'played': tableEx.played[n], 
-                                      'won': tableEx.wins[n], 
-                                      'lost': tableEx.losses[n], 
-                                      'drawn': tableEx.draws[n], 
-                                      'gf': tableEx.gf[n], 
-                                      'ga': tableEx.ga[n], 
-                                      'gd': tableEx.gd[n], 
-                                      'points': tableEx.points[n]}
+# Get extracted team data
+teams = tableEx.teams;
 
 # Display large table is default
 displaySmall = False
