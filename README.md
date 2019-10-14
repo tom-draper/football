@@ -24,6 +24,6 @@ Something I found during this project is that the Requests module doesn't always
 -------------------------------------------------------
 
 ### How to use:
-Running premierLeagueTable.py will display the current premier league table in the command line. The full table is displayed as default. Entering command line argument "small" or "s" after premierLeagueTable.py will display a small version of the table.  
-The program requests and displays data from the official Premier League table website (https://www.premierleague.com/tables).
+Run premierLeagueTable.py to display the current premier league table in the command line. The full table is displayed as default. Enter command line argument "small" or "s" after premierLeagueTable.py to display a small version of the table.  
+The program retrieves and displays data from the official Premier League table website (https://www.premierleague.com/tables).
 
