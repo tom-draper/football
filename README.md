@@ -14,5 +14,5 @@ The full size table is displayed as default.
 
 ### Prerequisites
 Required Python modules:
-- Requests
-- Beautiful soup (bs4)
+- requests
+- beautiful soup (bs4)
