@@ -12,7 +12,7 @@ Run premierLeagueTable.py to display the current premier league table in the com
 - s or small - displays more compact version of the table
 The full size table is displayed as default.
 
-### Prerequisites
+#### Prerequisites
 Required Python modules:
 - requests
 - beautiful soup (bs4)
