@@ -2,7 +2,7 @@
 
 ### Command Line Tool
 
-A script that can be used to fetch and display the Premier League table at the current time. The program retrieves and displays data from the official Premier League table website (https://www.premierleague.com/tables).
+A script that can be used to fetch and display the current Premier League table on the command line. The program retrieves and displays data from the official Premier League table website (https://www.premierleague.com/tables).
 
 Currently, this implementation only uses web scraping which isn't ideal as the website used could change format. In future, I plan on creating an alternative method of data collection using a football API.
 
