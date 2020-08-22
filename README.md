@@ -4,8 +4,6 @@ A command line tool that can be used to fetch and display the Premier League tab
 
 Currently implementation uses web scraping which isn't ideal as the website used could change format in future. I plan on switching to use of a football data API in future. 
 
--------------------------------------------------------
-
 ## Getting Started
 Run premierLeagueTable.py to display the current premier league table in the command line. 
 
