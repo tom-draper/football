@@ -1,11 +1,24 @@
-# display.py - display teams values in formatted table
-
+# display.py - functions required to display the table to the command line
 import datetime
 
 class Display():
+    def __init__(self):
+        self.teamAlias = {'Wolverhampton Wanderers FC': 'Wolves',
+                          'Tottenham Horspur FC': 'Spurs',
+                          'Brighton & Hove Albion FC': 'Brighton',
+                          'West Bromwich Albion FC': 'West Brom'}
+        # Initials of teams that do not take their first three letters
+        self.initials = {'West Bromwich Albion FC': 'WBA',
+                         'Brighton & Hove Albion FC': 'BHA',
+                         'West Ham United': 'WHU',
+                         'Sheffield United': 'SHU',
+                         'Manchester United': 'MUN',
+                         'Aston Villa FC': 'AVL',
+                         'Manchester City FC': 'MCI'}
+                         
     
     # Get current premier league season date based on todays date
-    def getPLDate(self):
+    def currentSeasonDate(self):
         now = datetime.datetime.now()
         if now.month >= 8:
             plDate = str(now.year) + '/' + str(now.year + 1)[2:]
@@ -17,7 +30,21 @@ class Display():
     # Display table title
     def displayTitle(self):
         plDate = self.getPLDate()
-        print('Premier League Table ' + str(plDate))
+        print('Premier League Table ' + str(currentSeasonDate))
+    
+    def shortenName(self, name):
+        if name in self.teamAlias.keys():
+            name = self.teamAlias[name]
+        name = name.replace(' FC', '')
+        name = name.replace(' AFC', '')
+        return name
+
+    def teamInitials(self, name):
+        if name in self.initials.keys():
+            name = self.initials[name]
+        else:
+            name = name[:3].upper()
+        return name
 
     # Display small used by small table 
     def smallDivider(self):
@@ -30,13 +57,15 @@ class Display():
         self.smallDivider()
         print('|' + (' ' * 3) + 'TEAM' + (' ' * 3) + '|   P    GD   |   P  |')
         self.smallDivider()
-        for team in teams.keys():
-            print('| ' + (str(teams[team]['position']) + '.').ljust(4, ' ') +
-                  team.ljust(5, ' ') + '|  ' +
-                  str(teams[team]['played']).rjust(2, ' ') +
-                  str(teams[team]['gd']).rjust(6, ' ') +
+        for team in teams:
+            print('| ' + 
+                  (str(team['position']) + '.').ljust(4, ' ') +
+                  self.teamInitials(team['team']['name']).ljust(5, ' ') + 
+                  '|  ' +
+                  str(team['playedGames']).rjust(2, ' ') +
+                  str(team['goalDifference']).rjust(6, ' ') +
                   '|'.rjust(4, ' ') + 
-                  str(teams[team]['points']).rjust(4, ' ') +
+                  str(team['points']).rjust(4, ' ') +
                   '  |')
         self.smallDivider()
         
@@ -47,22 +76,26 @@ class Display():
     # Display full team data in form of a table
     def displayLargeTable(self, teams):
         self.displayTitle()
+        
         # Print table
         self.largeDivider()
-        print('|' + (' ' * 13) + 'TEAM' + (' ' * 13) + '|   P   W   D   L  ' + 
-              '  GF   GA   GD   |   P  |')
+        print('|' + (' ' * 13) + 'TEAM' + (' ' * 13) + '|   P   W   D   L  ' + '  GF   GA   GD   |   P  |')
         self.largeDivider()
-        for teamData in teams.values():
-            print('| ' + (str(teamData['position']) + '.').ljust(4, ' ') +
-                  teamData['name'].ljust(25, ' ') + '|  ' +
-                  str(teamData['played']).rjust(2, ' ') +
-                  str(teamData['won']).rjust(4, ' ') +
-                  str(teamData['drawn']).rjust(4, ' ') +
-                  str(teamData['lost']).rjust(4, ' ') +
-                  str(teamData['gf']).rjust(6, ' ') +
-                  str(teamData['ga']).rjust(5, ' ') +
-                  str(teamData['gd']).rjust(5, ' ') +
+        
+        for team in teams:
+            print('| ' + 
+                  (str(team['position']) + '.').ljust(4, ' ') +
+                  self.shortenName(team['team']['name']).ljust(25, ' ') + 
+                  '|  ' +
+                  str(team['playedGames']).rjust(2, ' ') +
+                  str(team['won']).rjust(4, ' ') +
+                  str(team['draw']).rjust(4, ' ') +
+                  str(team['lost']).rjust(4, ' ') +
+                  str(team['goalsFor']).rjust(6, ' ') +
+                  str(team['goalsAgainst']).rjust(5, ' ') +
+                  str(team['goalDifference']).rjust(5, ' ') +
                   '|'.rjust(4, ' ') + 
-                  str(teamData['points']).rjust(4, ' ') +
+                  str(team['points']).rjust(4, ' ') +
                   '  |')
+            
         self.largeDivider()

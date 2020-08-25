@@ -1,79 +1,54 @@
-# extractor.py - scrapes premier league table website and locates table
-# row values. Values are sorted into speficic list for display.
-#
-# Note: I found both html 'table' and 'tbody' attribute only enclosed the top 
-# row when returned with beautiful soup but not when inspecting through web 
-# browser. As a result, all table row attributes on the webpage are retrieved 
-# from full website and only the first twenty are used.
-
 import requests
-from bs4 import BeautifulSoup
+import json
+import pprint
 
 class Extractor:
-
     def __init__(self):
         self.teamNames = []
         self.teams = {}
-        
-    # Requests and returns html from a webpage 
-    def requestWebpage(self, url):
-        print('Requesting webpage...')
+    
+    def getXAuthToken(self):
+        with open('my_api_details.json', 'r') as f:
+            data = f.read()
+            obj = json.loads(data)
+            return str(obj['x-auth-token'])
+        print("Enter your X-Auth-Token from your football-data.org account into the api_details.json file.")
+        return None
 
-        res = requests.get(url)
-        try:
-            res.raise_for_status()
-            res.status_code == requests.codes.ok
-        except Exception as ex:
-            print('There was a problem: %s' % (ex))
-
-        return res.text
+    """For possible endpoints visit: https://www.football-data.org/documentation/quickstart/
+    """
+    def requestWebpage(self, endpoint):
+        url = "https://api.football-data.org/v2/"
+        x_auth_token = self.getXAuthToken()
+        headers = {'X-Auth-Token': x_auth_token}
         
-    # Sort all extracted table values list into separate ordered lists
-    def sortTableValues(self, values):
-        for idx in range(0, len(self.teamNames)):
-            i = idx * 9; # Get index in values list current team data begins
-            self.teams[self.teamNames[idx][1]] = {'name': self.teamNames[idx][0], 
-                                                  'position': values[i], 
-                                                  'played': values[i + 1], 
-                                                  'won': values[i + 2], 
-                                                  'lost': values[i + 3], 
-                                                  'drawn': values[i + 4], 
-                                                  'gf': values[i + 5], 
-                                                  'ga': values[i + 6], 
-                                                  'gd': values[i + 7], 
-                                                  'points': values[i + 8]}
-
-    # Extract premier league table values and sort into lists
-    def extractTable(self):
-        webpage = self.requestWebpage('https://www.premierleague.com/tables') # Get premier league table webpage html
-        soup = BeautifulSoup(webpage, 'html.parser')
+        response = requests.get(url + endpoint, headers=headers)
+        return json.loads(response.text)
+    
+    def writeJSON(self, data, filename):
+        with open(filename, 'w') as f:
+            json.dump(data, f, indent=4)
+    
+    def readJSON(self, filename):
+        with open(filename) as f:
+            data = json.load(f)
+            return data
+    
+    def extractTableValues(self, refresh_data=True):
+        endpoint = 'competitions/PL/standings'
         
-        # Get html table rows of for each team in premier league table 
-        # Top team tableDark, next 3 tableMid, 5th tableLight, last 3 tableMid, rest empty
-        tableRows = soup.find_all('tr', {'class': ['tableDark', 'tableMid', 'tableLight', '']})
-        
-        tableValues = []
-        for row in tableRows[:20]: # Only first twenty rows
-            # Add team name to main teams list
-            teamLong = row.find('td', {'class': 'team'}).find('a').find('span', {'class', 'long'}).get_text()
-            teamShort = row.find('td', {'class': 'team'}).find('span', {'class': 'short'}).get_text()
-            # Save team name with abreviated version to list
-            self.teamNames.append(tuple([teamLong, teamShort]))
+        if refresh_data:
+            json_data = self.requestWebpage(endpoint)
+            standings = json_data['standings']
+            for standing in standings:
+                if standing['type'] == 'TOTAL':
+                    standings = standing['table']
+                    break
+            self.writeJSON(json_data, 'data.json')
+        else:
+            json_data = self.readJSON('data.json')
             
-            # Collect the html lines for the team's table values
-            lines = []
-            # Record the html containing team's position
-            lines.append(row.find('td', {'id': 'Tooltip'}).find('span', {'class': 'value'}))
-            # Add html table data line for played, wins, draws, losses and goal difference
-            lines += row.find_all('td', {'class': None})
-            # Add html table data line for goals for and goals against
-            lines += row.find_all('td', {'class': 'hideSmall'})
-            # Add html table data line for points
-            lines += row.find_all('td', {'class': 'points'})
-            # Extract raw data values and add to list
-            for line in lines:
-                tableValues.append(int(line.get_text().strip()))
-                
-        self.sortTableValues(tableValues)
-        
-        
+        # Ensure standings sorted by position
+        standings.sort(key=lambda x: x['position'])
+            
+        return standings
