@@ -1,6 +1,5 @@
 import requests
 import json
-import pprint
 
 class Extractor:
     def __init__(self):
@@ -8,7 +7,7 @@ class Extractor:
         self.teams = {}
     
     def getXAuthToken(self):
-        with open('my_api_details.json', 'r') as f:
+        with open('resources/api_details.json', 'r') as f:
             data = f.read()
             obj = json.loads(data)
             return str(obj['x-auth-token'])

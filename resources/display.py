@@ -29,8 +29,8 @@ class Display():
         
     # Display table title
     def displayTitle(self):
-        plDate = self.getPLDate()
-        print('Premier League Table ' + str(currentSeasonDate))
+        date = self.currentSeasonDate()
+        print('Premier League Table ' + str(date))
     
     def shortenName(self, name):
         if name in self.teamAlias.keys():
