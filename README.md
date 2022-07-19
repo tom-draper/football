@@ -1,6 +1,6 @@
-# Premier-League-Table
+# Football CLI
 
-A Python script that fetches and displays real time Premier League table on the command line.
+A Python script that fetches and displays real time football standings on the command line.
 The football data is retrieved from the FREE football data API [football-data.org](https://www.football-data.org/).
 
 ## Getting Started
