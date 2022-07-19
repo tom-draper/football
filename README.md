@@ -5,7 +5,7 @@ The football data is retrieved from the FREE football data API [football-data.or
 
 ## Getting Started
 
-### 1. Create a free API account ([football-data.org](https://www.football-data.org/))
+### 1. Create a free API account
 
 To run the script, the X-Auth token from your [football-data.org](https://www.football-data.org/) account is required. Your free-tier API key will allow up to 50 API calls per minute.
 

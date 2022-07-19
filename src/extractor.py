@@ -24,11 +24,11 @@ class Extractor:
         return json.loads(response.text)
     
     def _write_json(self, data, filename):
-        with open(filename, 'w') as f:
+        with open('data/' + filename, 'w') as f:
             json.dump(data, f, indent=4)
     
     def _read_json(self, filename):
-        with open(filename) as f:
+        with open('data/' + filename) as f:
             data = json.load(f)
             return data
         

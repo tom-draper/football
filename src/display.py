@@ -1,4 +1,4 @@
-from standings import StandardTable, CompactTable
+from src.standings import StandardTable, CompactTable
 
 class Display:
     def standings(self, teams: list, compact=False):
