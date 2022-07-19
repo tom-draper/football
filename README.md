@@ -1,30 +1,40 @@
 # Premier-League-Table
 
-### Command Line Tool
-
-A script that fetches and displays the current Premier League table on the command line.    
-The program retrieves and displays data from the football data API football-data.org (https://www.football-data.org/).
-
-#### Project Aims:
-- Create a useful tool to quickly display the real-time Premier League table on the command line.
-- Understand and use APIs for data collection
-
-#### What I Learned:
-- How APIs work
-- Why APIs are generally preferred over web scraping (I initially implemented data collection through web-scraping before later changing to API use)
-- How to use APIs to access data
-
--------------------------------------------------------
+A python script that fetches and displays real time Premier League table on the command line.
+The football data is retrieved from the football data API football-data.org (https://www.football-data.org/).
 
 ## Getting Started
-Run premier_league_table.py to display the current Premier League Table in the command line. 
 
-#### Optional Arguments
-- s or small - displays more compact version of the table
-The full size table is displayed as default.
+### 1. Create a free football-data.org account
 
-### Prerequisites
-Required Python modules:
-- requests (re)
-- json
-- datetime
+For real time data, this app requires your X-Auth token from your football-data.org account (completely free). Your API key will allow up to 50 calls per minute.
+
+### 2. Copy your X-Auth token into the <code>.env</code> file
+
+Paste your X-Auth token into the <code>.env</code>, after <code>X_AUTH_TOKEN=</code>
+
+### 3. Install pip dependencies
+
+The requests, json and datetime packages are required, to install these run:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run football.py
+
+#### Standings
+
+```bash
+py football.py standings
+```
+
+##### Flags
+
+- <code>compact</code> or <code>c</code> - displays the compact version of the standings table 
+
+## Match Results
+
+```bash
+py football.py results
+```

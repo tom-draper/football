@@ -10,6 +10,6 @@ teams = e.extract_standings()
 
 display = Display()
 if 'compact'in sys.argv or 'c' in sys.argv:
-    display.display_standings(teams, compact=True) # Display small premier league instead
+    display.standings(teams, compact=True) # Display small premier league instead
 else:
-    display.display_standings(teams)
+    display.standings(teams)

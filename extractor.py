@@ -3,8 +3,6 @@ import json
 from dotenv import load_dotenv
 import os
 
-
-
 class Extractor:
     def __init__(self):
         self.team_names = []
@@ -47,6 +45,7 @@ class Extractor:
     
     def extract_standings(self, refresh_data=True) -> list:
         if refresh_data:
+            
             json_data = self._request_webpage('competitions/PL/standings')
             standings = self._extract_standings_from_json(json_data)
             if standings is None:
