@@ -1,13 +1,13 @@
 # Premier-League-Table
 
-A python script that fetches and displays real time Premier League table on the command line.
-The football data is retrieved from the football data API football-data.org (https://www.football-data.org/).
+A Python script that fetches and displays real time Premier League table on the command line.
+The football data is retrieved from the football data API [football-data.org](https://www.football-data.org/).
 
 ## Getting Started
 
 ### 1. Create a free football-data.org account
 
-For real time data, this app requires your X-Auth token from your football-data.org account (completely free). Your API key will allow up to 50 calls per minute.
+To run the script, the X-Auth token from your free [football-data.org](https://www.football-data.org/) account is required. Your API key will allow up to 50 calls per minute.
 
 ### 2. Copy your X-Auth token into the <code>.env</code> file
 
