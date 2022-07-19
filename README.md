@@ -21,7 +21,7 @@ The requests, json and datetime packages are required, to install these run:
 pip install -r requirements.txt
 ```
 
-### 4. Run football.py
+### 4. Run <code>football.py</code>
 
 #### Standings
 
@@ -33,7 +33,7 @@ py football.py standings
 
 - <code>compact</code> or <code>c</code> - displays the compact version of the standings table 
 
-## Match Results
+#### Match Results
 
 ```bash
 py football.py results
