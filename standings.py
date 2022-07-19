@@ -13,20 +13,6 @@ class Table:
                          'Manchester United FC': 'MUN',
                          'Aston Villa FC': 'AVL',
                          'Manchester City FC': 'MCI'}
-        
-    @staticmethod
-    def _current_season_date() -> str:
-        now = datetime.datetime.now()
-        if now.month >= 6:  # Season starts in Sept, but API transfers mid-summer
-            date = str(now.year) + '/' + str(now.year + 1)[2:]
-        else:
-            date = str(now.year - 1) + '/' + str(now.year)[2:]
-        
-        return date
-    
-    def _display_title(self):
-        date = self._current_season_date()
-        print('Premier League Table ' + str(date))
 
 class CompactTable(Table):
     def __init__(self):
@@ -41,26 +27,25 @@ class CompactTable(Table):
 
     @staticmethod
     def _display_table_divider():
-        print('⸻' * 32)
+        print(' ' + '—' * 33)
     
     @staticmethod
     def _display_column_headings():
-        print('│' + (' ' * 3) + 'TEAM' + (' ' * 3) + '|  Pl    GD   |   P  |')
+        print(' │' + (' ' * 3) + 'TEAM' + (' ' * 3) + '|  Pl    GD   |   P  |')
     
     def _display_team_rows(self, teams):
         for team in teams:
-            print('│ ' +
+            print(' │ ' +
                   (str(team['position'])).rjust(2, ' ') + '  ' +
-                  self._team_initials(team['team']['name']).ljust(5, ' ') +
-                  '│  ' +
+                  self._team_initials(team['team']['name']).ljust(4, ' ') +
+                  ' │  ' +
                   str(team['playedGames']).rjust(2, ' ') +
                   str(team['goalDifference']).rjust(6, ' ') +
-                  '│'.rjust(4, ' ') +
+                  ' │'.rjust(4, ' ') +
                   str(team['points']).rjust(4, ' ') +
                   '  │')
 
     def display(self, teams):
-        # self._display_title()
         self._display_table_divider()
         self._display_column_headings()
         self._display_table_divider()
@@ -82,16 +67,16 @@ class StandardTable(Table):
         
     @staticmethod
     def _display_table_divider():
-        print('⸻' * 72)
+        print(' ' + '—' * 73)
     
     @staticmethod
     def _display_column_headings():
-        print('|' + (' ' * 12) + 'TEAM' + (' ' * 12) +
+        print(' |' + (' ' * 12) + 'TEAM' + (' ' * 12) +
               '|   P   W   D   L    GF   GA   GD   |   P  |')
     
     def _display_team_rows(self, teams: list):
         for team in teams:
-            print('│  ' +
+            print(' │  ' +
                   (str(team['position'])).rjust(2, ' ') + '  ' +
                   self._shorten_name(team['team']['name']).ljust(22, ' ') +
                   '│  ' +
@@ -107,7 +92,6 @@ class StandardTable(Table):
                   '  │') 
 
     def display(self, teams):
-        # self._display_title()
         self._display_table_divider()
         self._display_column_headings()
         self._display_table_divider()
