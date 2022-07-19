@@ -32,9 +32,3 @@ py football.py standings
 **Flags**
 
 - <code>compact</code> or <code>c</code> - displays the compact version of the standings table.
-
-#### Match Results
-
-```bash
-py football.py results
-```
