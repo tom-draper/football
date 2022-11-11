@@ -3,7 +3,7 @@
 A Python script that fetches and displays real time football standings on the command line.
 The football data is retrieved from the FREE football data API [football-data.org](https://www.football-data.org/).
 
-## Getting Started
+## Installation
 
 ### 1. Create a free API account
 
@@ -21,7 +21,7 @@ The requests, json and datetime packages are required, to install these run:
 pip install -r requirements.txt
 ```
 
-### 4. Run <code>football.py</code>
+## Usage
 
 #### Standings
 
