@@ -26,7 +26,7 @@ pip install -r requirements.txt
 #### Standings
 
 ```bash
-py football.py standings
+python3 football.py standings
 ```
 
 **Flags**
